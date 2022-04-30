@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+import { BorderAll } from '@mui/icons-material';
 
 const theme = createTheme();
 
@@ -26,23 +28,27 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <div style={{ display:'flex', border: '1px solid red' }}>
+      <div style={{ float:'left', width:'75%', backgroundColor:'#A200FF' }}>
+      </div>
+      <div style={{ width:'100%' }}>
+        <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
             sx={{
-                marginTop: 8,
+                marginTop: '50%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
             }}
             >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-                Login
-            </Typography>
+            <h2 style={{ color:'#A200FF' }}>
+              GRAFIA
+              <span style={{ color:'#000000' }}>
+                Cidade
+              </span>
+            </h2>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                 <TextField
                 margin="normal"
@@ -64,25 +70,31 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
                 />
-                <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Lembrar de mim"
-                />
-                <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2, mb: 2 }}
-                >
-                Entrar
-                </Button>
+                <button type='submit'
+                style={{
+                  color: '#FFF',
+                  backgroundColor:'#A200FF',
+                  width:'396px',
+                  height:'60px',
+                  borderRadius:'5px',
+                  border:'none',
+                  marginTop:'10%',
+                  fontSize:'18px',
+                  cursor:'pointer'
+                }}
+                >  
+                  Entrar
+                </button>
                 <Grid container>
                 <Grid item xs>
                     <Link href="#" variant="body2" 
                     sx={{ 
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center', 
+                            alignItems: 'center',
+                            marginTop:'8%',
+                            color:'#A200FF',
+                            fontSize:'14px'
                         }}>
                     Esqueceu sua senha?
                     </Link>
@@ -92,5 +104,7 @@ export default function SignIn() {
             </Box>
         </Container>
     </ThemeProvider>
+        </div>
+  </div>
   );
 }
