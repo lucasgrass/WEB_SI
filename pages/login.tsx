@@ -28,8 +28,16 @@ export default function SignIn() {
   };
 
   return (
-    <div style={{ display:'flex', border: '1px solid red' }}>
+    <div style={{ display:'flex', border: '1px solid red', height:'100vh' }}>
       <div style={{ float:'left', width:'75%', backgroundColor:'#A200FF' }}>
+        <div style={{ display:'flex', marginTop:'50%', marginLeft:'35%' }}>
+            <h2 style={{ color:'#FFF', fontSize:'40px' }}>
+              GRAFIA
+              <span style={{ color:'#000000', fontSize:'40px' }}>
+                Cidade
+              </span>
+            </h2>
+        </div>
       </div>
       <div style={{ width:'100%' }}>
         <ThemeProvider theme={theme}>
@@ -37,18 +45,12 @@ export default function SignIn() {
             <CssBaseline />
             <Box
             sx={{
-                marginTop: '50%',
+                marginTop: '80%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
             }}
             >
-            <h2 style={{ color:'#A200FF' }}>
-              GRAFIA
-              <span style={{ color:'#000000' }}>
-                Cidade
-              </span>
-            </h2>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                 <TextField
                 margin="normal"
