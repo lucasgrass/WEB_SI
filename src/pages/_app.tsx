@@ -2,7 +2,7 @@ import React from 'react';
 import { AppProps } from 'next/app';
 import store from '@portal/store';
 import { Provider } from 'react-redux';
-import './login/style.css';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

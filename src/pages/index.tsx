@@ -2,6 +2,7 @@ import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import SignIn from './login/login';
+import RecoverPassword from './recover_password/recover_password';
 
 const Home: NextPage = () => {
   return (
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main style={{ margin: '0', padding: '0' }}>
-        <SignIn />
+        <RecoverPassword />
       </main>
     </div>
   );
