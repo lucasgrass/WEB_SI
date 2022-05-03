@@ -6,6 +6,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { authenticate } from '@portal/store/Auth/action';
 
 const theme = createTheme();
 
@@ -18,6 +20,8 @@ export default function SignIn() {
       password: data.get('password'),
     });
   };
+
+  const dispatch = useDispatch();
 
   return (
     <div className="container-father">
@@ -67,7 +71,13 @@ export default function SignIn() {
                   id="password"
                   autoComplete="current-password"
                 />
-                <button type="submit" className="button-enter">
+                <button
+                  type="submit"
+                  className="button-enter"
+                  onClick={() =>
+                    dispatch(authenticate({ email: '', password: '' }))
+                  }
+                >
                   Entrar
                 </button>
                 <Grid container>
