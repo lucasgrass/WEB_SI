@@ -41,7 +41,7 @@ export default function RecoverPassword() {
                 marginTop: '65%',
               }}
             >
-              <h2 className="title-recover">Esqueci minha senha</h2>
+              <h2 className="title">Esqueci minha senha</h2>
               <Box
                 component="form"
                 onSubmit={handleSubmit}

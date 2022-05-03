@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main style={{ margin: '0', padding: '0' }}>
-        <SignIn />
+        <RecoverPassword />
       </main>
     </div>
   );

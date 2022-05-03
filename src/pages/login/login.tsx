@@ -12,10 +12,10 @@ const theme = createTheme();
 export default function SignIn() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const login_info = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: login_info.get('email'),
+      password: login_info.get('password'),
     });
   };
 
@@ -35,12 +35,13 @@ export default function SignIn() {
             <CssBaseline />
             <Box
               sx={{
-                marginTop: '80%',
+                marginTop: '65%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
               }}
             >
+              <h2 className="title">Fazer Login</h2>
               <Box
                 component="form"
                 onSubmit={handleSubmit}

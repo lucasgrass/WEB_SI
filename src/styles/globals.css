@@ -1,2 +1,29 @@
 @import '../pages/login/style.css';
 @import '../pages/recover_password/style.css';
+
+.container-father {
+  display: flex;
+  height: 100vh;
+}
+
+.container-left {
+  float: left;
+  width: 75%;
+  background-color: #a200ff;
+}
+
+.text-grafia {
+  color: #fff;
+  font-size: 40px;
+}
+
+.text-cidade {
+  color: #000000;
+  font-size: 40px;
+}
+
+.title {
+  color: #a200ff;
+  font-size: 30px;
+  font-weight: bold;
+}
