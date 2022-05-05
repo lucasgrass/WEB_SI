@@ -6,18 +6,25 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { authenticate } from '@portal/store/Auth/action';
+import type { NextPage } from 'next';
+import { sign } from 'crypto';
 
 const theme = createTheme();
 
-export default function RecoverPassword() {
+const SignIn:NextPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const login_info = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: login_info.get('email'),
+      password: login_info.get('password'),
     });
   };
+
+  const dispatch = useDispatch();
+
   return (
     <div className="container-father">
       <div className="container-left">
@@ -34,14 +41,13 @@ export default function RecoverPassword() {
             <CssBaseline />
             <Box
               sx={{
+                marginTop: '65%',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
                 alignItems: 'center',
-                marginTop: '65%',
               }}
             >
-              <h2 className="title">Esqueci minha senha</h2>
+              <h2 className="title">Fazer Login</h2>
               <Box
                 component="form"
                 onSubmit={handleSubmit}
@@ -58,14 +64,42 @@ export default function RecoverPassword() {
                   autoComplete="email"
                   autoFocus
                 />
-                <button type="submit" className="button-enter">
-                  Recuperar Senha
-                </button>
-                <button type="submit" className="button-back">
-                  Voltar
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Digite sua senha"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                <button
+                  type="submit"
+                  className="button-enter"
+                  onClick={() =>
+                    dispatch(authenticate({ email: '', password: '' }))
+                  }
+                >
+                  Entrar
                 </button>
                 <Grid container>
-                  <Grid item xs></Grid>
+                  <Grid item xs>
+                    <Link
+                      href="/recover_password"
+                      variant="body2"
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        marginTop: '8%',
+                        color: '#A200FF',
+                        fontSize: '14px',
+                      }}
+                    >
+                      Esqueceu sua senha?
+                    </Link>
+                  </Grid>
                 </Grid>
               </Box>
             </Box>
@@ -75,3 +109,4 @@ export default function RecoverPassword() {
     </div>
   );
 }
+export default SignIn;
