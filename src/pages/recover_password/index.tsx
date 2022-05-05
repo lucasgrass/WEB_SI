@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import Toast from '@portal/services/toaster';
 
 const theme = createTheme();
 
@@ -62,7 +63,11 @@ const RecoverPassword: NextPage = () => {
                   autoComplete="email"
                   autoFocus
                 />
-                <button type="submit" className="button-enter">
+                <button
+                  type="submit"
+                  className="button-enter"
+                  onClick={() => Toast.success('qualquer coisa')}
+                >
                   Recuperar Senha
                 </button>
 
