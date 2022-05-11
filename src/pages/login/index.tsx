@@ -13,7 +13,7 @@ import { sign } from 'crypto';
 
 const theme = createTheme();
 
-const SignIn:NextPage = () => {
+const SignIn: NextPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const login_info = new FormData(event.currentTarget);
@@ -108,5 +108,5 @@ const SignIn:NextPage = () => {
       </div>
     </div>
   );
-}
+};
 export default SignIn;
