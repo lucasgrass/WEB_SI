@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
@@ -14,6 +14,8 @@ import { sign } from 'crypto';
 const theme = createTheme();
 
 const SignIn: NextPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const login_info = new FormData(event.currentTarget);
@@ -62,6 +64,7 @@ const SignIn: NextPage = () => {
                   label="Digite seu e-mail"
                   name="email"
                   autoComplete="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   autoFocus
                 />
                 <TextField
@@ -72,13 +75,14 @@ const SignIn: NextPage = () => {
                   label="Digite sua senha"
                   type="password"
                   id="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                 />
                 <button
                   type="submit"
                   className="button-enter"
                   onClick={() =>
-                    dispatch(authenticate({ email: '', password: '' }))
+                    dispatch(authenticate({ email: email, password: password }))
                   }
                 >
                   Entrar
