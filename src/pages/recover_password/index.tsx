@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import Toast from '@portal/services/toaster';
+
 import { useDispatch } from 'react-redux';
 import { recovery } from '@portal/store/Auth/action';
-import { ToastContainer } from 'react-toastify';
+import Logo from '@portal/components/Logo';
 
 const theme = createTheme();
 
@@ -35,14 +34,7 @@ const RecoverPassword: NextPage = () => {
   const router = useRouter();
   return (
     <div className="container-father">
-      <div className="container-left">
-        <div className="container-name">
-          <h2 className="text-grafia">
-            GRAFIA
-            <span className="text-cidade">Cidade</span>
-          </h2>
-        </div>
-      </div>
+      <Logo />
       <div className="width-100">
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
@@ -74,15 +66,7 @@ const RecoverPassword: NextPage = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   autoFocus
                 />
-                <button
-                  type="submit"
-                  className="button-enter"
-                  onClick={() => {
-                    if(!!email)
-                    Toast.success('E-mail de recuperação de senha enviado');
-                    else Toast.error('Digite um E-mail válido')
-                  }}
-                >
+                <button type="submit" className="button-enter">
                   Recuperar Senha
                 </button>
 

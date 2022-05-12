@@ -10,16 +10,17 @@
   float: left;
   width: 75%;
   background-color: #a200ff;
+  display: flex;
 }
 
 .text-grafia {
   color: #fff;
-  font-size: 40px;
+  font-size: 4rem;
 }
 
 .text-cidade {
   color: #000000;
-  font-size: 40px;
+  font-size: 4rem;
 }
 
 .title {

@@ -10,12 +10,15 @@ import { useDispatch } from 'react-redux';
 import { authenticate } from '@portal/store/Auth/action';
 import type { NextPage } from 'next';
 import { sign } from 'crypto';
+import Logo from '@portal/components/Logo';
 
 const theme = createTheme();
 
 const SignIn: NextPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const login_info = new FormData(event.currentTarget);
@@ -23,20 +26,18 @@ const SignIn: NextPage = () => {
       email: login_info.get('email'),
       password: login_info.get('password'),
     });
-  };
 
-  const dispatch = useDispatch();
+    dispatch(
+      authenticate({
+        email: login_info.get('email'),
+        password: login_info.get('password'),
+      })
+    );
+  };
 
   return (
     <div className="container-father">
-      <div className="container-left">
-        <div className="container-name">
-          <h2 className="text-grafia">
-            GRAFIA
-            <span className="text-cidade">Cidade</span>
-          </h2>
-        </div>
-      </div>
+      <Logo />
       <div className="width-100">
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
@@ -78,13 +79,7 @@ const SignIn: NextPage = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                 />
-                <button
-                  type="submit"
-                  className="button-enter"
-                  onClick={() =>
-                    dispatch(authenticate({ email: email, password: password }))
-                  }
-                >
+                <button type="submit" className="button-enter">
                   Entrar
                 </button>
                 <Grid container>

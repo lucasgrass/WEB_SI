@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-
+import Toast from '@portal/services/toaster';
 import AuthAPI from '@portal/repositories/auth';
 
 import { AUTH_LOGGED, AUTH_LOGIN, LOGOUT } from '../actionsType';
@@ -10,6 +10,7 @@ export const authenticate =
     dispatch(startLoading());
     try {
       const payload: models.LoginResponse = await AuthAPI.login(userData);
+      Toast.success('Logado com sucesso');
       if (payload) {
         dispatch({
           type: AUTH_LOGIN,
@@ -19,7 +20,7 @@ export const authenticate =
         });
       }
     } catch (err) {
-      console.log(err);
+      Toast.error('Usuário e/ou Senha inválidos');
     } finally {
       dispatch(stopLoading());
     }
@@ -29,8 +30,9 @@ export const recovery = (email: string) => async (dispatch: Dispatch) => {
   dispatch(startLoading());
   try {
     await AuthAPI.recovery(email);
+    Toast.success('E-mail de recuperação de senha enviado');
   } catch (err) {
-    // handle error
+    Toast.error('Digite um E-mail válido');
   } finally {
     dispatch(stopLoading());
   }
