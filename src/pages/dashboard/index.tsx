@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import 'boxicons';
 
 const Dashboard: NextPage = () => {
-  const router = useRouter();
   return (
     <div className="body">
       <div className="sidebar">
@@ -17,28 +16,23 @@ const Dashboard: NextPage = () => {
         </div>
         <ul className="nav_list">
           <li>
-            <i className="bx bx-grid-alt"></i>
-            <input type="text" placeholder="Search..." />
-            {/* <span className="tooltip">Dashboard</span> */}
-          </li>
-          <li>
             <a href="#">
               <i className="bx bx-user"></i>
-              <span className="links_name">User</span>
+              <span className="links_name">Usuários</span>
             </a>
             {/* <span className="tooltip">Dashboard</span> */}
           </li>
           <li>
             <a href="#">
-              <i className="bx bx-chat"></i>
-              <span className="links_name">Messages</span>
+              <i className="bx bx-notepad"></i>
+              <span className="links_name">Ocorrências</span>
             </a>
             {/* <span className="tooltip">Dashboard</span> */}
           </li>
           <li>
             <a href="#">
-              <i className="bx bx-pie-chart-alt-2"></i>
-              <span className="links_name">Analytics</span>
+              <i className="bx bx-archive"></i>
+              <span className="links_name">Tipos e Subtipos</span>
             </a>
             {/* <span className="tooltip">Dashboard</span> */}
           </li>
