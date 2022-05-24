@@ -1,11 +1,9 @@
-import React from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import SignIn from './login';
-import RecoverPassword from './recover_password';
-import Dash from './dashboard';
+import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Dash from './dashboard';
 
 const Home: NextPage = () => {
   return (
