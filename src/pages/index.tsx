@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import SignIn from './login';
 import RecoverPassword from './recover_password';
+import Dash from './dashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
 
       <main>
         {/* <RecoverPassword /> */}
+        <Dash />
         <SignIn />
         <ToastContainer />
       </main>
