@@ -29,6 +29,12 @@ const Dashboard: NextPage = () => {
       usuario,
       local,
       descricao,
+      ocorrencia: [
+        {
+          data: '2022-05-24'
+          usuario: '',
+        },
+      ],
     };
   }
 
