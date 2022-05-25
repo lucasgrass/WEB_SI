@@ -20,7 +20,7 @@ const Ocorrencias: NextPage = () => {
   return (
     <div>
       <div>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div>
           <OccurrencesList />
         </div>

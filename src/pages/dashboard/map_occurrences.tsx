@@ -4,11 +4,11 @@ import Sidebar from '@portal/components/sidebar';
 
 const Dashboard: NextPage = () => {
   return (
-    <div>
-      <Sidebar />
-      <div style={{ border: '1px solid red' }}>
-        <p>Lucassssssssssssssssdunnsunduaudauneundu</p>
+    <div style={{ border: '3px solid green' }}>
+      <div style={{ border: '2px solid black' }}>
+        <Sidebar />
       </div>
+      <div style={{ border: '1px solid red' }}>teste</div>
     </div>
   );
 };

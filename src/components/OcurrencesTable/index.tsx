@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
+import Occurrences from '../../mock-occurrences.json';
 
 function createData(
   tipo: string,
@@ -35,9 +37,18 @@ function createData(
         subtipo: 'subtipo',
         descricao: 'descricao',
       },
+      {
+        //dados minizaveis tem que ver o que vamos por, o formato e como vamos manipular.
+        tipo: 'teste',
+        data: 'data',
+        usuario: 'usuario',
+        subtipo: 'subtipo',
+        descricao: 'descricao',
+      },
     ],
   };
 }
+
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
@@ -106,6 +117,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 const rows = [
   createData('crime', '25/02/2022', 'guilherme', 'homicidio', 'aaaaa'),
 ];
+
+const [list, setList] = useState(Occurrences);
+
+console.log(list);
 
 export default function CollapsibleTable() {
   return (
