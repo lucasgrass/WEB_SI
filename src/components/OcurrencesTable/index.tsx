@@ -28,6 +28,7 @@ function createData(
     descricao,
     ocorrencia: [
       {
+        //dados minizaveis tem que ver o que vamos por, o formato e como vamos manipular.
         tipo: 'teste',
         data: 'data',
         usuario: 'usuario',
