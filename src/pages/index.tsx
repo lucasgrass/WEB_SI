@@ -3,7 +3,8 @@ import Head from 'next/head';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Dash from './dashboard';
+import Dash from './dashboard/list_occurrences';
+import SignIn from './login/index';
 
 const Home: NextPage = () => {
   return (
