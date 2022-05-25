@@ -14,35 +14,19 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import OccurrencesList from '../../components/OcurrencesTable';
 
-const Dashboard: NextPage = () => {
-  function createData(
-    tipo: string,
-    data: number,
-    usuario: string,
-    local: string,
-    descricao: string
-  ) {
-    return {
-      tipo,
-      data,
-      usuario,
-      local,
-      descricao,
-      ocorrencia: [
-        {
-          data: '2022-05-24'
-          usuario: '',
-        },
-      ],
-    };
-  }
-
+const Ocorrencias: NextPage = () => {
   return (
     <div>
-      <Sidebar />
+      <div>
+        <Sidebar />
+        <div>
+          <OccurrencesList />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default Ocorrencias;
