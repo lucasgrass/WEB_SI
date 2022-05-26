@@ -1,6 +1,6 @@
-import React from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 const Sidebar: NextPage = (props) => {
   const router = useRouter();
@@ -74,6 +74,16 @@ const Sidebar: NextPage = (props) => {
               <li>
                 <a className="link_name" href="/configuration">
                   Configurações
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <i className="bx bx-exit"></i>
+            <ul className="sub-menu blank">
+              <li>
+                <a className="link_name" href="/login">
+                  Sair
                 </a>
               </li>
             </ul>

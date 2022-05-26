@@ -1,6 +1,6 @@
+import Sidebar from '@portal/components/Sidebar';
 import { NextPage } from 'next';
 import React from 'react';
-import Sidebar from '@portal/components/sidebar';
 
 const Dashboard: NextPage = () => {
   return (
