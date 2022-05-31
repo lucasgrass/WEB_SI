@@ -13,7 +13,7 @@ const Sidebar: NextPage = (props) => {
             <i className="bx bx-home"></i>
             <ul className="sub-menu blank">
               <li>
-                <a className="link_name" href="/dashboard/home">
+                <a className="link_name" href="/dashboard">
                   Menu
                 </a>
               </li>
@@ -72,7 +72,7 @@ const Sidebar: NextPage = (props) => {
             <i className="bx bx-cog"></i>
             <ul className="sub-menu blank">
               <li>
-                <a className="link_name" href="/configuration">
+                <a className="link_name" href="/dashboard/configuration">
                   Configurações
                 </a>
               </li>
@@ -94,6 +94,7 @@ const Sidebar: NextPage = (props) => {
         <div className="home-content">
           <h4 className="text-grafia">GRAFIA</h4>
           <span className="text-cidade">Cidade</span>
+          <i className="bx bx-refresh"></i>
         </div>
       </section>
     </div>

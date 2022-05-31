@@ -68,3 +68,12 @@ export interface ReportProps {
   updatedAt: string;
   createdAt: string;
 }
+
+export interface ReportProps {
+  id: string;
+  email: string;
+  name: string;
+  password: string;
+  profiletype: int;
+  updateAt: string;
+}

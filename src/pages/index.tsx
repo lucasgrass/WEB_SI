@@ -4,6 +4,7 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './login';
+import Dash from '../pages/dashboard/index';
 
 const Home: NextPage = () => {
   return (
@@ -15,8 +16,8 @@ const Home: NextPage = () => {
 
       <main>
         {/* <RecoverPassword /> */}
-        {/* <Dash /> */}
-        <Login />
+        <Dash />
+        {/* <Login /> */}
         {/* <SignIn /> */}
         <ToastContainer />
       </main>

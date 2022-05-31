@@ -1,5 +1,6 @@
 /* Google Fonts Import Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -33,6 +34,18 @@
   text-align: center;
   line-height: 50px;
 }
+.home-section .home-content i {
+  border: 1px solid red;
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 50px;
+  color: #a200ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 .sidebar .logo-details .logo_name {
   font-size: 22px;
   color: #fff;
@@ -221,6 +234,7 @@
   width: calc(100% - 78px);
 }
 .home-section .home-content {
+  border: 1px solid green;
   height: 60px;
   display: flex;
   align-items: center;
