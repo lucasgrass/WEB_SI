@@ -3,8 +3,7 @@ import Head from 'next/head';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Dash from './dashboard/list_occurrences';
-import SignIn from './login/index';
+import Login from './login';
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +15,8 @@ const Home: NextPage = () => {
 
       <main>
         {/* <RecoverPassword /> */}
-        <Dash />
+        {/* <Dash /> */}
+        <Login />
         {/* <SignIn /> */}
         <ToastContainer />
       </main>
