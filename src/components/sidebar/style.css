@@ -35,7 +35,6 @@
   line-height: 50px;
 }
 .home-section .home-content i {
-  border: 1px solid red;
   height: 50px;
   min-width: 78px;
   text-align: center;
@@ -184,6 +183,10 @@
   padding: 12px 0;
   transition: all 0.5s ease;
 }
+.bx-refresh {
+  margin-right: 0;
+  margin-left: auto;
+}
 .sidebar.close .profile-details {
   background: none;
 }
@@ -234,7 +237,6 @@
   width: calc(100% - 78px);
 }
 .home-section .home-content {
-  border: 1px solid green;
   height: 60px;
   display: flex;
   align-items: center;
