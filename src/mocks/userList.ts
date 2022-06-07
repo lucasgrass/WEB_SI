@@ -3,7 +3,7 @@ import { UserProps } from '../models/module';
 export const UserList = [
   {
     id: '589f54d3-5410-4756-9e68-6265dbe38273',
-    title: 'vitorferrara@hotmail.com',
+    email: 'vitorferrara@hotmail.com',
     name: 'Vitor',
     password: '123123',
     profiletype: 0,
@@ -19,7 +19,7 @@ export const UserList = [
   },
   {
     id: '589f54d3-5410-4756-9e68-6265dbe38299',
-    title: 'test2@gmail.com',
+    email: 'test2@gmail.com',
     name: 'Guilherme',
     password: '123123',
     profiletype: 0,

@@ -69,7 +69,7 @@ export interface ReportProps {
   createdAt: string;
 }
 
-export interface ReportProps {
+export interface UserProps {
   id: string;
   email: string;
   name: string;
