@@ -11,7 +11,7 @@ const Dashboard: NextPage = () => {
       <div className="container-middle">
         <div>
           <p className="home-title">Olá, {User[0].name}!</p>
-          <p>Bem-Vindo a Dashboard do GRAFIA Cidade.</p>
+          <p className="home-text">Bem-Vindo a Dashboard do GRAFIA Cidade.</p>
         </div>
       </div>
     </div>

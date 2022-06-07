@@ -186,6 +186,7 @@
 .bx-refresh {
   margin-right: 0;
   margin-left: auto;
+  margin-top: 5px;
 }
 .sidebar.close .profile-details {
   background: none;
