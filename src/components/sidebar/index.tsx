@@ -94,7 +94,10 @@ const Sidebar: NextPage = (props) => {
         <div className="home-content">
           <h4 className="text-grafia">GRAFIA</h4>
           <span className="text-cidade">Cidade</span>
-          <i className="bx bx-refresh"></i>
+          <i
+            className="bx bx-refresh"
+            onClick={() => window.location.reload()}
+          ></i>
         </div>
       </section>
     </div>

@@ -51,29 +51,31 @@ export interface UserCreation {
 }
 
 export interface ReportProps {
-  id: string;
+  id?: string;
+  userId: string;
   title: string;
   description: string;
   typeId: string;
-  type: {
-    id: string;
-    typeName: string;
-    subTypes: string[];
-    createdAt: string;
-    updatedAt: string;
-  };
-  subTypes: string[];
+  subTypes: string;
   image: string;
   audio: string;
-  updatedAt: string;
-  createdAt: string;
+  latitude: string;
+  longitude: string;
+  type?: models.Type;
+  createdAt?: string;
 }
 
-export interface ReportProps {
+export interface UserProps {
   id: string;
   email: string;
   name: string;
   password: string;
   profiletype: int;
   updateAt: string;
+}
+
+export interface TypesProps {
+  id: string;
+  typeName: string;
+  subTypes: string[];
 }
