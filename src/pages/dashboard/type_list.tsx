@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import React from 'react';
 import { Types } from '@portal/mocks/types';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import Header from '@portal/components/Header';
 
 const Dashboard: NextPage = () => {
   const headers = ['ID', 'Tipo', 'Subtipos'];
@@ -10,11 +11,12 @@ const Dashboard: NextPage = () => {
     <div className="container-sidebar">
       <Sidebar />
       <div className="container-middle">
-        {/* <div className="table-title">Listagem de Tipos e Subtipos</div> */}
-        {/* <div className="container-create">
+        {/* <div className="table-title">Listagem de Tipos e Subtipos</div>
+        <div className="container-create">
           <button>Criar novo Tipo</button>
           <button>Criar novo Subtipo</button>
         </div> */}
+        <Header label="Listagem de Tipos" />
         <DataGrid
           columns={[
             { field: 'id', headerName: 'ID' },

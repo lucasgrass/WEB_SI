@@ -5,6 +5,7 @@ import { Occurrences } from '@portal/mocks/occurrences';
 import { NextPage } from 'next';
 import React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import Header from '@portal/components/Header';
 
 const Ocorrencias: NextPage = () => {
   const headers = ['ID da Ocorrência', 'Título', 'Tipo', 'SubTipo', 'Data'];
@@ -13,6 +14,7 @@ const Ocorrencias: NextPage = () => {
     <div className="container-sidebar">
       <Sidebar />
       <div className="container-middle">
+        <Header label="Lista de Ocorrências" />
         <DataGrid
           columns={[
             { field: 'id', headerName: 'ID' },
