@@ -1,11 +1,11 @@
+import { DataGrid } from '@mui/x-data-grid';
+import Header from '@portal/components/Header';
 import Sidebar from '@portal/components/Sidebar';
+import { userList } from '@portal/mocks/userList';
 import { NextPage } from 'next';
 import React from 'react';
-import { UserList } from '@portal/mocks/userList';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import Header from '@portal/components/Header';
 
-const Dashboard: NextPage = () => {
+const UserList: NextPage = () => {
   const headers = [
     'ID do Usuário',
     'Nome',
@@ -43,7 +43,7 @@ const Dashboard: NextPage = () => {
               flex: 1,
             },
           ]}
-          rows={UserList.map((item) => ({
+          rows={userList.map((item) => ({
             id: item.id,
             name: item.name,
             email: item.email,
@@ -57,4 +57,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default Dashboard;
+export default UserList;

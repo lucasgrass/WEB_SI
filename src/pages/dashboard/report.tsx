@@ -1,10 +1,9 @@
+import Header from '@portal/components/Header';
 import Sidebar from '@portal/components/Sidebar';
 import { NextPage } from 'next';
 import React from 'react';
-import Header from '@portal/components/Header';
-import { Button } from '@mui/material';
 
-const Dashboard: NextPage = () => {
+const Report: NextPage = () => {
   return (
     <div className="container-sidebar">
       <Sidebar />
@@ -16,4 +15,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default Dashboard;
+export default Report;

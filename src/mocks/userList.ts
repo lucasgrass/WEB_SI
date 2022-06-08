@@ -1,6 +1,6 @@
 import { UserProps } from '../models/module';
 
-export const UserList = [
+export const userList = [
   {
     id: '589f54d3-5410-4756-9e68-6265dbe38273',
     email: 'vitorferrara@hotmail.com',

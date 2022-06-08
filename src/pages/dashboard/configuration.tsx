@@ -1,12 +1,12 @@
-import Sidebar from '@portal/components/sidebar';
-import { NextPage } from 'next';
-import { User } from '@portal/mocks/user';
-import React from 'react';
-import Header from '@portal/components/Header';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
+import Header from '@portal/components/Header';
+import Sidebar from '@portal/components/sidebar';
+import { User } from '@portal/mocks/user';
+import { NextPage } from 'next';
+import React from 'react';
 
-const Dashboard: NextPage = () => {
+const Configuration: NextPage = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -82,4 +82,4 @@ const Dashboard: NextPage = () => {
   );
 };
 
-export default Dashboard;
+export default Configuration;
