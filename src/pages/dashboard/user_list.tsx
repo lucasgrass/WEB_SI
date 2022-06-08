@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import React from 'react';
 import { UserList } from '@portal/mocks/userList';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import Header from '@portal/components/Header';
 
 const Dashboard: NextPage = () => {
   const headers = [
@@ -17,6 +18,7 @@ const Dashboard: NextPage = () => {
     <div className="container-sidebar">
       <Sidebar />
       <div className="container-middle">
+        <Header label="Lista de Usuários" />
         <DataGrid
           columns={[
             { field: 'id', headerName: 'ID' },
