@@ -2,7 +2,6 @@ import Sidebar from '@portal/components/sidebar';
 import { NextPage } from 'next';
 import { User } from '@portal/mocks/user';
 import React from 'react';
-import { Button } from '@mui/material';
 import Header from '@portal/components/Header';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
@@ -25,28 +24,24 @@ const Dashboard: NextPage = () => {
       <Sidebar />
       <div className="container-middle">
         <Header label="Configurações" />
-        <div style={{ border: '1px solid red' }}>
-          <h3>Informações Pessoais</h3>
-          <p>
+        <div>
+          <h3 className="subtitle">Informações Pessoais</h3>
+          <p className="textfield-user">
             <b>Nome:</b> {User[0].name}
           </p>
-          <p>
+          <p className="textfield-user">
             <b>Email:</b> {User[0].email}
-            <Button variant="outlined" size="small">
-              Alterar Email
-            </Button>
+            <button className="button-change">Alterar E-mail</button>
           </p>
 
-          <p>
+          <p className="textfield-user">
             <b>Senha:</b> *******
-            <Button variant="outlined" size="small">
-              Alterar Senha
-            </Button>
+            <button className="button-change">Alterar Senha</button>
           </p>
         </div>
-        <div style={{ border: '1px solid green' }}>
-          <h3>Informações Administrativas</h3>
-          <p>
+        <div>
+          <h3 className="subtitle">Informações Administrativas</h3>
+          <p className="textfield-user">
             <b>Tipo de perfil:</b> {User[0].profiletype}
             <i
               className="bx bxs-info-circle"

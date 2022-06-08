@@ -4,7 +4,7 @@ export const Occurrences = [
   {
     id: '589f54d1-5410-4756-9e68-6265dbe38273',
     title: 'Muito Crime',
-    description: 'tem muito crime aqui',
+    description: 'Tem muito crime aqui',
     typeId: 'aef73746-1010-41df-8cfc-08f4cbf456f6',
     type: {
       id: 'aef73746-1010-41df-8cfc-08f4cbf456f6',
