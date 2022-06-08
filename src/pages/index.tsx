@@ -16,8 +16,8 @@ const Home: NextPage = () => {
 
       <main>
         {/* <RecoverPassword /> */}
-        <Dash />
-        {/* <Login /> */}
+        {/* <Dash /> */}
+        <Login />
         {/* <SignIn /> */}
         <ToastContainer />
       </main>

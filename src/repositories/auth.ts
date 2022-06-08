@@ -2,6 +2,7 @@ import getInstance from '@portal/api/axios';
 
 const AuthAPI = {
   login: async (userData: models.LoginRequest) => {
+    console.log('AAA');
     const instance = await getInstance();
     const { data } = await instance.post('/auth', userData);
 

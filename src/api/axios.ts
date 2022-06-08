@@ -1,3 +1,4 @@
+import StorageService from '@portal/services/storage';
 import Axios, { AxiosError, AxiosResponse } from 'axios';
 
 export enum AxiosStatus {
@@ -14,19 +15,27 @@ const handler: IHandler = {
 };
 
 export const getInstance = async () => {
-  // const accessToken = await StorageService.getItem(StorageItems.ACCESS_TOKEN);
+  const accessToken = await StorageService.getItem('TOKEN');
 
   const axiosInstance = Axios.create({
-    baseURL: 'https://34db-2804-18-869-cbbe-7c59-149d-2fb8-f1a6.ngrok.io',
+    baseURL: 'http://localhost:4547',
     timeout: 10000,
     headers: {
       'content-Type': 'application/json',
-      // Authorization: `Bearer ${accessToken}`,
+      Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
     },
   });
 
+  axiosInstance.interceptors.request.use((request) => {
+    console.log(request);
+    return request;
+  });
+
   axiosInstance.interceptors.response.use(
-    (response: AxiosResponse) => response,
+    (response: AxiosResponse) => {
+      console.log(response);
+      return response;
+    },
     async (err: AxiosError) => {
       if (err.response?.status === AxiosStatus.Unauthorized) {
         handler.unauthorizedError();

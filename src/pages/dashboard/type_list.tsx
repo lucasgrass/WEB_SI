@@ -14,10 +14,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DataGrid } from '@mui/x-data-grid';
 import Sidebar from '@portal/components/Sidebar';
+import { useReduxState } from '@portal/hooks/useReduxState';
 import { Types } from '@portal/mocks/types';
 import { TypesProps } from '@portal/models/module';
+import { createType, listTypes, updateType } from '@portal/store/Types/action';
 import { NextPage } from 'next';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { uuid } from 'uuidv4';
 
 const TypeList: NextPage = () => {
@@ -25,10 +28,15 @@ const TypeList: NextPage = () => {
   const [type, setType] = useState<TypesProps>({ typeName: '' });
   const [types, setTypes] = useState<TypesProps[]>(Types);
   const [counter, setCounter] = useState([]);
-
   const [open2, setOpen2] = useState(false);
   const [typeName, setTypeName] = useState('');
   const [subtypes, setSubtypes] = useState<string[]>([]);
+
+  const {
+    type: { typeList },
+  } = useReduxState();
+
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen(true);
@@ -79,9 +87,8 @@ const TypeList: NextPage = () => {
   };
 
   const handleSave = () => {
-    type.id = uuid();
-    setTypes([...types, type]);
-    Types.push(type);
+    console.log(type);
+    dispatch(createType(type));
     handleClose();
   };
 
@@ -110,13 +117,13 @@ const TypeList: NextPage = () => {
   };
 
   const handleChangeTypeName2 = (event: SelectChangeEvent) => {
-    let arr_subtypes = types;
-    let t = arr_subtypes.filter((item, index) => {
-      return types[index].typeName === (event.target.value as string);
+    let arr_subtypes = typeList;
+    let type = arr_subtypes.find((item, index) => {
+      return item.typeName === (event.target.value as string);
     });
-    setTypeName(t[0].typeName);
+    setTypeName(type.typeName);
 
-    if (t[0].subTypes) setSubtypes(t[0].subTypes);
+    if (type.subTypes) setSubtypes(type.subTypes);
   };
 
   const handleRemove2 = (idx: number) => {
@@ -129,28 +136,26 @@ const TypeList: NextPage = () => {
   };
 
   const handleSave2 = () => {
-    let arr_types = types;
-
-    let id = arr_types.filter((item) => {
-      return item.typeName === typeName;
-    });
-
-    let t: TypesProps = {
-      id: id[0].id,
+    let type = {
       typeName: typeName,
       subTypes: subtypes,
     };
 
-    arr_types = arr_types.filter((item) => {
-      return item.id !== t.id;
-    });
+    console.log(type);
 
-    arr_types.push(t);
-
-    setTypes(arr_types);
+    dispatch(
+      updateType(
+        type,
+        typeList.find((item) => item.typeName === typeName).id ?? ''
+      )
+    );
 
     handleClose2();
   };
+
+  useEffect(() => {
+    dispatch(listTypes());
+  }, []);
 
   return (
     <div className="container-sidebar">
@@ -194,12 +199,12 @@ const TypeList: NextPage = () => {
               flex: 1,
             },
           ]}
-          rows={types.map((item) => ({
+          rows={typeList.map((item) => ({
             id: item.id,
             typeName: item.typeName,
-            subTypes: item.subTypes,
+            subTypes: item.subTypes.join(', '),
           }))}
-          pageSize={types.length}
+          pageSize={typeList.length}
         />
       </div>
 
@@ -314,7 +319,7 @@ const TypeList: NextPage = () => {
               label="Tipo"
               onChange={handleChangeTypeName2}
             >
-              {types.map((item) => (
+              {typeList.map((item) => (
                 <MenuItem value={item.typeName}>{item.typeName}</MenuItem>
               ))}
             </Select>

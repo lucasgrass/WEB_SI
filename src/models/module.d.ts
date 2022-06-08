@@ -79,3 +79,12 @@ export interface TypesProps {
   typeName: string;
   subTypes?: string[];
 }
+
+export interface User {
+  id?: string;
+  name?: string;
+  email?: string;
+  profileType?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}

@@ -1,9 +1,11 @@
+import { getMe } from '@portal/store/User/action';
 import { Dispatch } from 'redux';
 import Toast from '@portal/services/toaster';
 import AuthAPI from '@portal/repositories/auth';
 
 import { AUTH_LOGGED, AUTH_LOGIN, LOGOUT } from '../actionsType';
 import { startLoading, stopLoading } from '../Loading/action';
+import StorageService from '@portal/services/storage';
 
 export const authenticate =
   (userData: models.LoginRequest) => async (dispatch: Dispatch) => {
@@ -11,6 +13,7 @@ export const authenticate =
     try {
       const payload: models.LoginResponse = await AuthAPI.login(userData);
       Toast.success('Logado com sucesso');
+      StorageService.setItem('TOKEN', payload.token);
       if (payload) {
         dispatch({
           type: AUTH_LOGIN,
@@ -19,6 +22,8 @@ export const authenticate =
           },
         });
       }
+      dispatch(getMe());
+      window.location.replace('/dashboard');
     } catch (err) {
       Toast.error('Usuário e/ou Senha inválidos');
     } finally {

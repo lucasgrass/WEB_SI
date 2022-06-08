@@ -7,7 +7,18 @@ export interface AuthState {
   logged: boolean;
 }
 
+export interface UserState {
+  me: models.User | null;
+  userList: models.User[];
+}
+
+export interface TypeState {
+  typeList: models.TypesProps[];
+}
+
 export interface ReduxState {
   loading: number;
   auth: AuthState;
+  user: UserState;
+  type: TypeState;
 }

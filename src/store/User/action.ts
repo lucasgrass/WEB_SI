@@ -1,3 +1,5 @@
+import { USER_ME, USER_LIST } from './../actionsType';
+import Toast from '@portal/services/toaster';
 import { Dispatch } from 'redux';
 
 import { startLoading, stopLoading } from '../Loading/action';
@@ -14,3 +16,33 @@ export const createUser =
       dispatch(stopLoading());
     }
   };
+
+export const getMe = () => async (dispatch: Dispatch) => {
+  dispatch(startLoading());
+  try {
+    const payload = await UserAPI.me();
+    dispatch({
+      type: USER_ME,
+      payload,
+    });
+  } catch (err) {
+    Toast.error('Erro, não foi possivel buscar os dados desse usuário');
+  } finally {
+    dispatch(stopLoading());
+  }
+};
+
+export const getUsers = () => async (dispatch: Dispatch) => {
+  dispatch(startLoading());
+  try {
+    const payload = await UserAPI.list();
+    dispatch({
+      type: USER_LIST,
+      payload,
+    });
+  } catch (err) {
+    Toast.error('Erro, não foi possivel listar os usuários');
+  } finally {
+    dispatch(stopLoading());
+  }
+};
