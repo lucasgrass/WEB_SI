@@ -75,7 +75,7 @@ export interface UserProps {
 }
 
 export interface TypesProps {
-  id: string;
+  id?: string;
   typeName: string;
-  subTypes: string[];
+  subTypes?: string[];
 }

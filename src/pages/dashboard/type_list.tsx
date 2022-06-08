@@ -1,21 +1,186 @@
+import { AddCircle, Delete } from '@mui/icons-material';
+import {
+  Box,
+  Button,
+  FormControl,
+  Input,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import { DataGrid } from '@mui/x-data-grid';
 import Sidebar from '@portal/components/Sidebar';
-import { NextPage } from 'next';
-import React from 'react';
 import { Types } from '@portal/mocks/types';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { TypesProps } from '@portal/models/module';
+import { NextPage } from 'next';
+import React, { ChangeEvent, useState } from 'react';
+import { uuid } from 'uuidv4';
 
-const Dashboard: NextPage = () => {
-  const headers = ['ID', 'Tipo', 'Subtipos'];
+const TypeList: NextPage = () => {
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState<TypesProps>({ typeName: '' });
+  const [types, setTypes] = useState<TypesProps[]>(Types);
+  const [counter, setCounter] = useState([]);
+
+  const [open2, setOpen2] = useState(false);
+  const [typeName, setTypeName] = useState('');
+  const [subtypes, setSubtypes] = useState<string[]>([]);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setCounter([]);
+    setType({ typeName: '', subTypes: [] });
+    setOpen(false);
+
+    setTypeName('');
+    setSubtypes([]);
+    setOpen2(false);
+  };
+
+  const handleChangeTypeName = (event: ChangeEvent<HTMLInputElement>) => {
+    setType({ typeName: event.target.value });
+  };
+
+  const handleChangeSubtype = (
+    typeName: string,
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    let arr = type.subTypes ? type.subTypes : [];
+    arr[index] = event.target.value;
+
+    setType({ typeName, subTypes: arr });
+  };
+
+  const handleAdd = () => {
+    let len = counter.length;
+    setCounter([...counter, len]);
+  };
+
+  const handleRemove = (idx: number, typeName: string) => {
+    let arr_counter = counter;
+    arr_counter = arr_counter.filter((item, index) => {
+      return index !== idx;
+    });
+    setCounter(arr_counter);
+
+    let arr_subtypes = type.subTypes;
+    arr_subtypes = arr_subtypes.filter((item, index) => {
+      return index !== idx;
+    });
+    setType({ typeName, subTypes: arr_subtypes });
+  };
+
+  const handleSave = () => {
+    type.id = uuid();
+    setTypes([...types, type]);
+    Types.push(type);
+    handleClose();
+  };
+
+  const handleOpen2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = () => {
+    setTypeName('');
+    setSubtypes([]);
+    setOpen2(false);
+  };
+
+  const handleAdd2 = (subtypes: string[]) => {
+    setSubtypes([...subtypes, '']);
+  };
+
+  const handleChangeSubtype2 = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    let arr = [...subtypes];
+    arr[index] = event.target.value;
+
+    setSubtypes(arr);
+  };
+
+  const handleChangeTypeName2 = (event: SelectChangeEvent) => {
+    let arr_subtypes = types;
+    let t = arr_subtypes.filter((item, index) => {
+      return types[index].typeName === (event.target.value as string);
+    });
+    setTypeName(t[0].typeName);
+
+    if (t[0].subTypes) setSubtypes(t[0].subTypes);
+  };
+
+  const handleRemove2 = (idx: number) => {
+    let arr_subtypes = subtypes;
+    arr_subtypes = arr_subtypes.filter((item, index) => {
+      return index !== idx;
+    });
+
+    setSubtypes(arr_subtypes);
+  };
+
+  const handleSave2 = () => {
+    let arr_types = types;
+
+    let id = arr_types.filter((item) => {
+      return item.typeName === typeName;
+    });
+
+    let t: TypesProps = {
+      id: id[0].id,
+      typeName: typeName,
+      subTypes: subtypes,
+    };
+
+    arr_types = arr_types.filter((item) => {
+      return item.id !== t.id;
+    });
+
+    arr_types.push(t);
+
+    setTypes(arr_types);
+
+    handleClose2();
+  };
+
   return (
     <div className="container-sidebar">
       <Sidebar />
       <div className="container-middle">
-        {/* <div className="table-title">Listagem de Tipos e Subtipos</div> */}
-        {/* <div className="container-create">
-          <button>Criar novo Tipo</button>
-          <button>Criar novo Subtipo</button>
-        </div> */}
+        <div className="table-title" style={{ marginLeft: '5px' }}>
+          Listagem de Tipos e Subtipos
+        </div>
+
+        <div
+          style={{ marginTop: '10px', marginBottom: '10px', marginLeft: '5px' }}
+        >
+          <Button
+            variant="contained"
+            onClick={handleOpen}
+            style={{ backgroundColor: '#a200ff' }}
+          >
+            Adicionar novo Tipo
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleOpen2}
+            style={{ backgroundColor: '#a200ff', marginLeft: '10px' }}
+          >
+            Adicionar novo Subtipo
+          </Button>
+        </div>
+
         <DataGrid
+          style={{ height: '81.8%' }}
           columns={[
             { field: 'id', headerName: 'ID' },
             {
@@ -29,16 +194,200 @@ const Dashboard: NextPage = () => {
               flex: 1,
             },
           ]}
-          rows={Types.map((item) => ({
+          rows={types.map((item) => ({
             id: item.id,
             typeName: item.typeName,
             subTypes: item.subTypes,
           }))}
-          pageSize={Types.length}
+          pageSize={types.length}
         />
       </div>
+
+      <Dialog open={open} onClose={handleClose} fullWidth>
+        <DialogTitle>Adicionar Novo Tipo</DialogTitle>
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { ml: 3, mb: 5 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <FormControl variant="standard">
+            <InputLabel htmlFor="component-simple">Nome do Tipo</InputLabel>
+            <Input
+              id="component-simple"
+              value={type.typeName}
+              onChange={handleChangeTypeName}
+            />
+          </FormControl>
+        </Box>
+
+        <div
+          style={{
+            height: '64px',
+          }}
+        >
+          <DialogTitle display={'inline-block'}>Adicionar Subtipo</DialogTitle>
+
+          <Button
+            onClick={handleAdd}
+            style={{ marginBottom: '10px' }}
+            disabled={type.typeName === '' ? true : false}
+          >
+            <AddCircle fontSize="large" style={{ color: '#a200ff' }} />
+          </Button>
+        </div>
+
+        {counter.map((item, index) => (
+          <Box
+            component="form"
+            sx={{
+              '& > :not(style)': { ml: 3, mb: 5 },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <FormControl variant="standard" style={{ display: 'inline-block' }}>
+              <InputLabel htmlFor="component-simple">
+                Subtipo {index + 1}
+              </InputLabel>
+              <Input
+                id="component-simple"
+                value={
+                  type.subTypes && type.subTypes.length > 0
+                    ? type.subTypes[index]
+                    : ''
+                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  handleChangeSubtype(type.typeName, e, index)
+                }
+              />
+            </FormControl>
+            <Button
+              style={{ marginTop: '15px' }}
+              onClick={() => {
+                handleRemove(index, type.typeName);
+              }}
+            >
+              <Delete
+                fontSize="medium"
+                color="error"
+                style={{ display: 'inline-block' }}
+              />
+            </Button>
+          </Box>
+        ))}
+
+        <DialogActions>
+          <Button onClick={handleClose} color="error">
+            Cancelar
+          </Button>
+          <Button onClick={handleSave} style={{ color: '#a200ff' }}>
+            Adicionar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={open2} onClose={handleClose} fullWidth>
+        <DialogTitle>Adicionar Novo Subtipo</DialogTitle>
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { ml: 3, mb: 5 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <FormControl
+            style={{
+              width: '500px',
+            }}
+          >
+            <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={typeName}
+              label="Tipo"
+              onChange={handleChangeTypeName2}
+            >
+              {types.map((item) => (
+                <MenuItem value={item.typeName}>{item.typeName}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+
+        <div
+          style={{
+            height: '64px',
+          }}
+        >
+          <DialogTitle display={'inline-block'}>Adicionar Subtipo</DialogTitle>
+
+          <Button
+            onClick={() => handleAdd2(subtypes)}
+            style={{ marginBottom: '10px' }}
+            disabled={typeName === '' ? true : false}
+          >
+            <AddCircle fontSize="large" style={{ color: '#a200ff' }} />
+          </Button>
+        </div>
+
+        {subtypes &&
+          subtypes.map((item, index) => (
+            <Box
+              component="form"
+              sx={{
+                '& > :not(style)': { ml: 3, mb: 5 },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <FormControl
+                variant="standard"
+                style={{ display: 'inline-block' }}
+              >
+                <InputLabel htmlFor="component-simple">
+                  Subtipo {index + 1}
+                </InputLabel>
+                <Input
+                  id="component-simple"
+                  value={item}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    handleChangeSubtype2(e, index)
+                  }
+                />
+              </FormControl>
+              <Button
+                style={{ marginTop: '15px' }}
+                onClick={() => {
+                  handleRemove2(index);
+                }}
+              >
+                <Delete
+                  fontSize="medium"
+                  color="error"
+                  style={{ display: 'inline-block' }}
+                />
+              </Button>
+            </Box>
+          ))}
+
+        <DialogActions>
+          <Button onClick={handleClose2} color="error">
+            Cancelar
+          </Button>
+          <Button onClick={handleSave2} style={{ color: '#a200ff' }}>
+            Adicionar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
 
-export default Dashboard;
+export default TypeList;

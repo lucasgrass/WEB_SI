@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react';
 import Map, { Marker, Popup } from 'react-map-gl';
 import CITIES from '../../../CITIES.json';
 import Pin from './pin';
+
 const TOKEN =
   'pk.eyJ1IjoicmVuYXRvYmFyYmFzYW50b3MiLCJhIjoiY2wzdzA2NmhwMDFuNTNjbjFvamQ0Y2xtaSJ9.dcZxm0l1Qe3_Cqzx9haXkw';
 
@@ -25,9 +26,6 @@ const Mapa: NextPage = () => {
             position: 'fixed',
           }}
           onClick={(e) => {
-            console.log(city);
-            // If we let the click event propagates to the map, it will immediately close the popup
-            // with `closeOnClick: true`
             e.originalEvent.stopPropagation();
             setPopupInfo(city);
           }}
@@ -64,7 +62,7 @@ const Mapa: NextPage = () => {
               longitude={Number(popupInfo.geometry.coordinates[0])}
               latitude={Number(popupInfo.geometry.coordinates[1])}
               onClose={() => setPopupInfo(null)}
-              style={{ bottom: '600px', position: 'fixed' }}
+              style={{ bottom: '615px', position: 'fixed' }}
             >
               <div
                 style={{
