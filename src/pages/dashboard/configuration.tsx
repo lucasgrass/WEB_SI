@@ -97,11 +97,14 @@ const Configuration: NextPage = () => {
         </div>
       </div>
       <Dialog open={open} onClose={handleClose} fullWidth>
-        <DialogTitle style={{ fontWeight: 'bold' }}>Alterar Senha</DialogTitle>
+        <DialogTitle style={{ fontWeight: 'bold', fontSize: '30px' }}>
+          Alterar a senha
+        </DialogTitle>
+
         <Box
           component="form"
           sx={{
-            '& > :not(style)': { ml: 3, mb: 10 },
+            '& > :not(style)': { ml: 3, mb: 3 },
           }}
           noValidate
           autoComplete="off"
@@ -122,16 +125,24 @@ const Configuration: NextPage = () => {
               fullWidth
               name="newpassword"
               label="Nova Senha"
-              type="newpassword"
+              type="password"
               id="newpassword"
             />
           </FormControl>
         </Box>
         <DialogActions>
-          <button onClick={handleClose} className="button-change">
+          <button
+            onClick={handleClose}
+            className="button-change"
+            style={{ width: '100px' }}
+          >
             Cancelar
           </button>
-          <button onClick={handleClose} className="button-change">
+          <button
+            onClick={handleClose}
+            className="button-change"
+            style={{ width: '100px' }}
+          >
             Alterar
           </button>
         </DialogActions>

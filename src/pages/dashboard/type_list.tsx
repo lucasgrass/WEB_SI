@@ -296,12 +296,20 @@ const TypeList: NextPage = () => {
         ))}
 
         <DialogActions>
-          <Button onClick={handleClose} color="error">
+          <button
+            onClick={handleClose}
+            className="button-change"
+            style={{ width: '100px' }}
+          >
             Cancelar
-          </Button>
-          <Button onClick={handleSave} style={{ color: '#a200ff' }}>
+          </button>
+          <button
+            onClick={handleSave}
+            className="button-change"
+            style={{ width: '100px' }}
+          >
             Adicionar
-          </Button>
+          </button>
         </DialogActions>
       </Dialog>
 
@@ -393,12 +401,20 @@ const TypeList: NextPage = () => {
           ))}
 
         <DialogActions>
-          <Button onClick={handleClose2} color="error">
+          <button
+            onClick={handleClose2}
+            className="button-change"
+            style={{ width: '100px' }}
+          >
             Cancelar
-          </Button>
-          <Button onClick={handleSave2} style={{ color: '#a200ff' }}>
+          </button>
+          <button
+            onClick={handleSave2}
+            className="button-change"
+            style={{ width: '100px' }}
+          >
             Adicionar
-          </Button>
+          </button>
         </DialogActions>
       </Dialog>
     </div>

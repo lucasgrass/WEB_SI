@@ -97,3 +97,16 @@
 .button-change:hover {
   background-color: hsl(278, 100%, 22%);
 }
+
+.button-types {
+  border: 1px;
+  border-radius: 5px;
+  color: white;
+  background: #a200ff;
+  cursor: pointer;
+  width: 175px;
+  height: 30px;
+}
+.button-types:hover {
+  background-color: hsl(278, 100%, 22%);
+}

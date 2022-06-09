@@ -93,21 +93,26 @@ const Ocorrencias: NextPage = () => {
           pageSize={Occurrences.length}
         />
       </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {'Certeza que deseja remover essa ocorrência?'}
+      <Dialog open={open} onClose={handleClose} maxWidth>
+        <DialogTitle style={{ fontWeight: 'bold', fontSize: '30px' }}>
+          Certeza que deseja remover essa ocorrência?
         </DialogTitle>
         <DialogContent></DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Não</Button>
-          <Button onClick={handleClose} autoFocus>
+          <button
+            onClick={handleClose}
+            className="button-change"
+            style={{ width: '75px' }}
+          >
+            Não
+          </button>
+          <button
+            onClick={handleClose}
+            className="button-change"
+            style={{ width: '75px' }}
+          >
             Sim
-          </Button>
+          </button>
         </DialogActions>
       </Dialog>
     </div>
