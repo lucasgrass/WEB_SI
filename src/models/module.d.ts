@@ -88,3 +88,16 @@ export interface User {
   createdAt?: string;
   updatedAt?: string;
 }
+
+interface MapFeaturesProps {
+  type: string;
+  properties: { nome: string; tipo: string; subtipos: string };
+  geometry: { type: string; coordinates: [lng: number, lat: number] };
+}
+
+export interface MapInfoProps {
+  type: string;
+  name: string;
+  crs: { type: string; properties: { name: string } };
+  features: MapFeaturesProps[];
+}
