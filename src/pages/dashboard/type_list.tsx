@@ -8,10 +8,10 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Dialog,
+  DialogActions,
+  DialogTitle,
 } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
 import { DataGrid } from '@mui/x-data-grid';
 import Sidebar from '@portal/components/Sidebar';
 import { useReduxState } from '@portal/hooks/useReduxState';
@@ -197,6 +197,16 @@ const TypeList: NextPage = () => {
               field: 'subTypes',
               headerName: 'Subtipos',
               flex: 1,
+            },
+            {
+              field: 'Remover',
+              renderCell: () => {
+                return (
+                  <Button variant="outlined" color="error">
+                    <i className="bx bx-trash"></i>
+                  </Button>
+                );
+              },
             },
           ]}
           rows={typeList.map((item) => ({

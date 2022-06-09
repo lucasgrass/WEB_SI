@@ -34,6 +34,7 @@ const UserList: NextPage = () => {
       <div className="container-middle">
         <Header label="Lista de Usuários" />
         <DataGrid
+          style={{ height: '92.8%' }}
           columns={[
             { field: 'id', headerName: 'ID' },
             {
