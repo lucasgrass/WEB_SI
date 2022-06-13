@@ -46,3 +46,16 @@ export const getUsers = () => async (dispatch: Dispatch) => {
     dispatch(stopLoading());
   }
 };
+
+export const updateUser =
+  (userData: models.User, id: string) => async (dispatch: Dispatch) => {
+    dispatch(startLoading());
+    try {
+      await UserAPI.update(userData, id);
+      dispatch(getMe());
+    } catch (err) {
+      Toast.error('Erro, não foi possivel atualizar os dados desse usuário');
+    } finally {
+      dispatch(stopLoading());
+    }
+  };

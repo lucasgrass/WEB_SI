@@ -17,6 +17,12 @@ const UserAPI = {
 
     return data;
   },
+  update: async (userData: models.User, id: string) => {
+    const instance = await getInstance();
+    const { data } = await instance.put(`/user/${id}`);
+
+    return data;
+  },
 };
 
 export default UserAPI;

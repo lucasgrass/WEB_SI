@@ -8,11 +8,14 @@ import {
   Typography,
 } from '@mui/material';
 import Sidebar from '@portal/components/Sidebar';
+import { useReduxState } from '@portal/hooks/useReduxState';
 import { cities } from '@portal/mocks/cities';
 import { MapInfoProps } from '@portal/models/module';
+import { listReports } from '@portal/store/Reports/action';
 import { NextPage } from 'next';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Map, { Layer, LayerProps, Marker, Popup, Source } from 'react-map-gl';
+import { useDispatch } from 'react-redux';
 import Pin from './pin';
 
 const TOKEN =
@@ -45,6 +48,10 @@ const Mapa: NextPage = () => {
   const [zoom, setZoom] = useState(13);
   const [visible, setVisible] = useState(false);
   const [typeName, setTypeName] = useState('');
+  const dispatch = useDispatch();
+  const {
+    report: { reportsList },
+  } = useReduxState();
 
   const radiusStyle: LayerProps = {
     id: 'radius',
@@ -66,50 +73,34 @@ const Mapa: NextPage = () => {
 
   const pins = useMemo(
     () =>
-      filterType
-        ? filterType.features.map((city, index) => (
-            <Marker
-              key={`marker-${index}`}
-              longitude={city.geometry.coordinates[0]}
-              latitude={city.geometry.coordinates[1]}
-              anchor="bottom"
-              style={{
-                width: '20px',
-                height: '20px',
-                bottom: '600px',
-                position: 'fixed',
-              }}
-              onClick={(e) => {
-                e.originalEvent.stopPropagation();
-                setPopupInfo(city);
-              }}
-            >
-              <Pin />
-            </Marker>
-          ))
-        : cities.features.map((city, index) => (
-            <Marker
-              key={`marker-${index}`}
-              longitude={city.geometry.coordinates[0]}
-              latitude={city.geometry.coordinates[1]}
-              anchor="bottom"
-              style={{
-                width: '20px',
-                height: '20px',
-                bottom: '600px',
-                position: 'fixed',
-              }}
-              onClick={(e) => {
-                e.originalEvent.stopPropagation();
-                setPopupInfo(city);
-              }}
-            >
-              <Pin />
-            </Marker>
-          )),
-
-    [filterType]
+      reportsList
+        .filter((item) => !!item.latitude && !!item.longitude)
+        .map((city, index) => (
+          <Marker
+            key={`marker-${index}`}
+            longitude={parseFloat(city.longitude)}
+            latitude={parseFloat(city.latitude)}
+            anchor="bottom"
+            style={{
+              width: '20px',
+              height: '20px',
+              bottom: '600px',
+              position: 'fixed',
+            }}
+            onClick={(e) => {
+              e.originalEvent.stopPropagation();
+              setPopupInfo(city);
+            }}
+          >
+            <Pin />
+          </Marker>
+        )),
+    [reportsList]
   );
+
+  useEffect(() => {
+    dispatch(listReports());
+  }, []);
 
   return (
     <div className="container-sidebar">
@@ -124,7 +115,6 @@ const Mapa: NextPage = () => {
             bearing: 0,
             pitch: 0,
           }}
-          minZoom={13}
           mapStyle="mapbox://styles/mapbox/streets-v11"
           mapboxAccessToken={TOKEN}
           style={{ width: '100%', height: '100%' }}
@@ -282,8 +272,8 @@ const Mapa: NextPage = () => {
           {popupInfo && (
             <Popup
               anchor="top"
-              longitude={Number(popupInfo.geometry.coordinates[0])}
-              latitude={Number(popupInfo.geometry.coordinates[1])}
+              longitude={Number(popupInfo.longitude)}
+              latitude={Number(popupInfo.latitude)}
               onClose={() => setPopupInfo(null)}
               style={{ bottom: '615px', position: 'fixed' }}
             >
@@ -301,9 +291,7 @@ const Mapa: NextPage = () => {
                     marginBottom: '10px',
                   }}
                 >
-                  <h4 style={{ fontWeight: 'bold' }}>
-                    {popupInfo.properties.nome}
-                  </h4>
+                  <h4 style={{ fontWeight: 'bold' }}>{popupInfo.title}</h4>
                 </div>
 
                 <div style={{ marginLeft: '5px' }}>
@@ -311,14 +299,14 @@ const Mapa: NextPage = () => {
                     Tipo:
                     <span style={{ fontWeight: 'normal' }}>
                       {' '}
-                      {popupInfo.properties.tipo}
+                      {popupInfo.type.typeName}
                     </span>
                   </p>
                   <p style={{ fontWeight: 'bold' }}>
                     Subtipo:
                     <span style={{ fontWeight: 'normal' }}>
                       {' '}
-                      {popupInfo.properties.subtipos}
+                      {popupInfo.subTypes.join(', ')}
                     </span>
                   </p>
                 </div>

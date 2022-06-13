@@ -10,3 +10,5 @@ export const USER_ME = 'USER_ME';
 export const USER_LIST = 'USER_LIST';
 
 export const TYPE_LIST = 'TYPE_LIST';
+
+export const REPORT_LIST = 'REPORT_LIST';

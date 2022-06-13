@@ -16,9 +16,14 @@ export interface TypeState {
   typeList: models.TypesProps[];
 }
 
+export interface ReportsState {
+  reportsList: models.ReportProps[];
+}
+
 export interface ReduxState {
   loading: number;
   auth: AuthState;
   user: UserState;
   type: TypeState;
+  report: ReportsState;
 }

@@ -12,10 +12,14 @@ const pinStyle = {
 
 function Pin({ size = 20 }) {
   return (
-    <svg height={size} viewBox="0 0 24 24" style={pinStyle}>
+    <svg
+      height={size}
+      viewBox="0 0 24 24"
+      style={{ ...pinStyle, transform: `translate(${-size / 2}px,${-size}px)` }}
+    >
       <path d={ICON} />
     </svg>
   );
 }
 
-export default React.memo(Pin);
+export default Pin;

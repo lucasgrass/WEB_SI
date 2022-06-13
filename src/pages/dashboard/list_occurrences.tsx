@@ -2,7 +2,7 @@ import Row from '@portal/components/Row';
 import Sidebar from '@portal/components/Sidebar';
 import { Occurrences } from '@portal/mocks/occurrences';
 import { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Header from '@portal/components/Header';
 import {
@@ -12,18 +12,17 @@ import {
   Dialog,
   Button,
 } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useReduxState } from '@portal/hooks/useReduxState';
+import { listReports, removeReport } from '@portal/store/Reports/action';
 
 const Ocorrencias: NextPage = () => {
-  const headers = [
-    'ID da Ocorrência',
-    'Título',
-    'Descrição',
-    'Tipo',
-    'SubTipo',
-    'Data',
-  ];
-
   const [open, setOpen] = React.useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const dispatch = useDispatch();
+  const {
+    report: { reportsList },
+  } = useReduxState();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,6 +31,10 @@ const Ocorrencias: NextPage = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(listReports());
+  }, []);
 
   return (
     <div className="container-sidebar">
@@ -74,7 +77,9 @@ const Ocorrencias: NextPage = () => {
                   <Button
                     variant="outlined"
                     color="error"
-                    onClick={handleClickOpen}
+                    onClick={() => {
+                      handleClickOpen();
+                    }}
                   >
                     <i className="bx bx-trash"></i>
                   </Button>
@@ -82,15 +87,15 @@ const Ocorrencias: NextPage = () => {
               },
             },
           ]}
-          rows={Occurrences.map((item) => ({
+          rows={reportsList.map((item) => ({
             id: item.id,
             title: item.title,
             description: item.description,
             type: item.type.typeName,
-            subtype: item.type.subTypes.join(' ,'),
+            subtype: item.type.subTypes.join(', '),
             date: new Date(item.createdAt).toLocaleString('pt-br'),
           }))}
-          pageSize={Occurrences.length}
+          pageSize={reportsList.length}
         />
       </div>
       <Dialog open={open} onClose={handleClose} maxWidth>
@@ -107,7 +112,10 @@ const Ocorrencias: NextPage = () => {
             Não
           </button>
           <button
-            onClick={handleClose}
+            onClick={() => {
+              dispatch(removeReport());
+              handleClose();
+            }}
             className="button-change"
             style={{ width: '75px' }}
           >
