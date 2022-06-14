@@ -12,6 +12,7 @@ import { useReduxState } from '@portal/hooks/useReduxState';
 import { cities } from '@portal/mocks/cities';
 import { MapInfoProps } from '@portal/models/module';
 import { listReports } from '@portal/store/Reports/action';
+import { listTypes } from '@portal/store/Types/action';
 import { NextPage } from 'next';
 import React, { useEffect, useMemo, useState } from 'react';
 import Map, { Layer, LayerProps, Marker, Popup, Source } from 'react-map-gl';
@@ -42,15 +43,18 @@ const haversine = (lng1: number, lat1: number, lng2: number, lat2: number) => {
 
 const Mapa: NextPage = () => {
   const [popupInfo, setPopupInfo] = useState(null);
+  const [reports, setReports] = useState([]);
   const [filterType, setfilterType] = useState<MapInfoProps | null>(null);
   const [lng, setLng] = useState(-47.05);
   const [lat, setLat] = useState(-22.83);
   const [zoom, setZoom] = useState(13);
   const [visible, setVisible] = useState(false);
   const [typeName, setTypeName] = useState('');
+
   const dispatch = useDispatch();
   const {
     report: { reportsList },
+    type: { typeList },
   } = useReduxState();
 
   const radiusStyle: LayerProps = {
@@ -58,7 +62,7 @@ const Mapa: NextPage = () => {
     type: 'circle',
     paint: {
       'circle-radius': 300 / (zoom / 10),
-      'circle-color': 'rgba(162,0,255,0.3)',
+      'circle-color': 'rgba(162,0,255,0.1)',
     },
   };
 
@@ -66,15 +70,26 @@ const Mapa: NextPage = () => {
     id: 'point',
     type: 'circle',
     paint: {
-      'circle-radius': 10,
+      'circle-radius': 5,
       'circle-color': 'rgba(0,0,255,0.7)',
     },
   };
 
+  useEffect(() => {
+    setReports(reportsList);
+  }, [reportsList]);
+
   const pins = useMemo(
     () =>
-      reportsList
+      reports
         .filter((item) => !!item.latitude && !!item.longitude)
+        .filter((item) => {
+          if (typeName === '') {
+            return true;
+          } else {
+            return item.type.typeName === typeName;
+          }
+        })
         .map((city, index) => (
           <Marker
             key={`marker-${index}`}
@@ -95,11 +110,12 @@ const Mapa: NextPage = () => {
             <Pin />
           </Marker>
         )),
-    [reportsList]
+    [reportsList, typeName, reports]
   );
 
   useEffect(() => {
     dispatch(listReports());
+    dispatch(listTypes());
   }, []);
 
   return (
@@ -129,19 +145,18 @@ const Mapa: NextPage = () => {
 
             if (visible) {
               let obj = Object.assign({}, cities);
-              let filtered_arr = obj.features.filter((item) => {
+              let filtered_arr = reportsList.filter((item) => {
                 let h = haversine(
                   lng,
                   lat,
-                  item.geometry.coordinates[0],
-                  item.geometry.coordinates[1]
+                  parseFloat(item.longitude),
+                  parseFloat(item.latitude)
                 );
 
                 if (h <= 1.76) return item;
               });
 
-              obj.features = filtered_arr;
-              setfilterType(obj);
+              setReports(filtered_arr);
             } else {
               setfilterType(null);
             }
@@ -200,10 +215,8 @@ const Mapa: NextPage = () => {
                 }}
               >
                 <MenuItem value={''}>Escolha um Tipo</MenuItem>
-                {cities.features.map((item) => (
-                  <MenuItem value={item.properties.tipo}>
-                    {item.properties.tipo}
-                  </MenuItem>
+                {typeList.map((item) => (
+                  <MenuItem value={item.typeName}>{item.typeName}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -223,7 +236,6 @@ const Mapa: NextPage = () => {
             </Button>
           </div>
           {pins}
-
           {visible && (
             <>
               <Source

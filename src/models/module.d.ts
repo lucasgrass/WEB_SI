@@ -61,7 +61,7 @@ export interface ReportProps {
   audio: string;
   latitude: string;
   longitude: string;
-  type?: models.Type;
+  type?: models.TypesProps;
   createdAt?: string;
 }
 
